@@ -16,3 +16,6 @@ deploy_key/deploy_key.pub
 ssh_keys/authorized_keys
 ssl_cert/*
 .idea/
+ssh_keys/*_prod_key*
+prod/config.py
+.envrc

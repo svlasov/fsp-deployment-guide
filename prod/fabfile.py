@@ -3,6 +3,8 @@ import os
 from fabric.api import *
 from fabric.contrib.files import sed
 
+from prod.config import HOSTS, USER_FULL_NAME, GROUP, DEPLOYER, ROOT, PASS, SSH_KEY_DIR
+
 """
    Fabric file to upload public/private keys to remote servers
    and set up non-root users. Also prevents SSH-ing in with the
@@ -10,29 +12,30 @@ from fabric.contrib.files import sed
    Fabric script with "fab bootstrap".
 """
 # run the bootstrap process as root before it is locked down
-env.user = 'root'
+env.user = ROOT
 
 # the remote server's root password
-env.password = ''
+env.password = PASS
 
 # all IP address or hostnames of the servers you want to put
 # your SSH keys and authorized_host files on, ex: 192.168.1.1
-env.hosts = ['192.168.1.1']
+env.hosts = HOSTS
 
 # your full name for the new non-root user
-env.new_user_full_name = 'Matt Makai' # ex: Matt Makai
+env.new_user_full_name = USER_FULL_NAME # ex: Matt Makai
 
 # username for the new non-root user to be created
-env.new_user = 'deployer' # ex: deployer
+env.new_user = DEPLOYER  # ex: deployer
 
 # group name for the new non-root user to be created
-env.new_user_grp = 'deployers' # ex: deployers
+env.new_user_grp = GROUP # ex: deployers
 
 # local filesystem directory where your prod_key.pub and
 # authorized_keys files are located (they will be scp'd
-# to target hosts) don't include a trailing slash
+# to target hosts.ini) don't include a trailing slash
 # note: the tilde resolves to your home directory
-env.ssh_key_dir = '~/fsp-deployment-guide/ssh_keys'
+
+env.ssh_key_dir = SSH_KEY_DIR #'~/fsp-deployment-guide/ssh_keys'
 
 """
    The following functions should not need to be modified to

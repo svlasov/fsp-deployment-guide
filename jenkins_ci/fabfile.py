@@ -31,7 +31,7 @@ env.new_user_grp = 'deployers' # ex: deployers
 
 # local filesystem directory where your prod_key.pub and
 # authorized_keys files are located (they will be scp'd
-# to target hosts) don't include a trailing slash
+# to target hosts.ini) don't include a trailing slash
 # note: the tilde resolves to your home directory
 env.ssh_key_dir = '~/fsp-deployment-guide/jenkins_ci'
 
